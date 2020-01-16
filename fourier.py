@@ -25,17 +25,17 @@ while gameloop:
     x = y = 0
 
     window.fill(black)
-    for i in range(30):
+    for i in range(50):
         prevx = x
         prevy = y
         n = i*2 + 1
-        radius = 75 * (4/(n*math.pi))
+        radius = 100 * (4/(n*math.pi))
         x += radius * math.cos(n*time)
         y += radius * math.sin(n*time)
 
-        r = 255  # 0+random.randint(5, 250)
-        g = 255  # 0 + random.randint(5, 250)
-        b = 255  # 0+random.randint(5, 250)
+        r = 0+random.randint(5, 250)
+        g = 0 + random.randint(5, 250)
+        b = 0+random.randint(5, 250)
 
         pygame.draw.circle(window, white, (150+int(prevx),
                                            300+int(prevy)), int(radius), 1)
@@ -43,14 +43,14 @@ while gameloop:
         pygame.draw.line(window, white, (150+int(prevx), 300+int(prevy)),
                          (150+int(x), 300+int(y)))
 
-    clock.tick(300)
+    #clock.tick(300)
 
     dots.insert(0, y)
     pygame.draw.line(window, (r, g, b), (150+x, 300 + y),
                      (350, 300+int(dots[0])))
-    for i in range(len(dots)):
-        gfxdraw.pixel(window, 350 + i, 300+int(dots[i]), (r, g, b))
-        # pygame.draw.polygon(window,white,((350+i,dots[i])))
+    for i in range(len(dots)-2):
+        #gfxdraw.pixel(window, 350 + i, 300+int(dots[i]), (r, g, b))
+        pygame.draw.polygon(window,(r,g,b),((350+i,300+dots[i]),(350+i+1,300+dots[i+1]),(350+i+2,300+dots[i+2])),5)
     pygame.display.update()
     if len(dots) > 500:
         dots = dots[0:450]
